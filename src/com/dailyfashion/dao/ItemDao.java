@@ -4,6 +4,8 @@ import com.dailyfashion.model.Item;
 
 public interface ItemDao {
 	
+	void createItemTable();
+	
 	int createItem(Item item);
 
 	Item readItem(String itemId);
@@ -11,4 +13,5 @@ public interface ItemDao {
 	int updateItem(Item item);
 
 	int deleteItem(String itemId);
+	
 }

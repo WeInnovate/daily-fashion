@@ -5,7 +5,7 @@ import com.dailyfashion.dao.ItemDaoImpl;
 import com.dailyfashion.model.Item;
 
 public class ItemServiceImpl implements ItemService {
-	
+
 	ItemDao itemDao;
 
 	public ItemServiceImpl() {
@@ -14,9 +14,8 @@ public class ItemServiceImpl implements ItemService {
 
 	@Override
 	public int createItem(Item item) {
-		System.out.println(this.getClass().getSimpleName()+" >> Creating Item");
-		itemDao.createItem(item);
-		return 0;
+		System.out.println(this.getClass().getSimpleName() + " >> Creating Item");
+		return itemDao.createItem(item);
 	}
 
 	@Override
@@ -35,6 +34,11 @@ public class ItemServiceImpl implements ItemService {
 	public int deleteItem(String itemId) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public void createItemTable() {
+		itemDao.createItemTable();
 	}
 
 }

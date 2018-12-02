@@ -3,6 +3,7 @@ package com.dailyfashion.service;
 import com.dailyfashion.model.Item;
 
 public interface ItemService {
+	void createItemTable();
 
 	int createItem(Item item);
 
