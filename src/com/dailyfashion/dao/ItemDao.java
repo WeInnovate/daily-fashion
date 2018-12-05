@@ -1,5 +1,7 @@
 package com.dailyfashion.dao;
 
+import java.util.List;
+
 import com.dailyfashion.model.Item;
 
 public interface ItemDao {
@@ -13,5 +15,7 @@ public interface ItemDao {
 	int updateItem(Item item);
 
 	int deleteItem(String itemId);
+	
+	List<Item> getItems();
 	
 }
