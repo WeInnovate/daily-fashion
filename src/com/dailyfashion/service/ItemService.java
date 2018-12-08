@@ -1,5 +1,7 @@
 package com.dailyfashion.service;
 
+import java.util.List;
+
 import com.dailyfashion.model.Item;
 
 public interface ItemService {
@@ -13,4 +15,5 @@ public interface ItemService {
 
 	int deleteItem(String itemId);
 
+	List<Item> getItems();
 }

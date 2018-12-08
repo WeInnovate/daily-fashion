@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.dailyfashion.model.Item;
+import com.dailyfashion.util.IdGenerator;
 
 public class ItemDaoImpl implements ItemDao {
 
@@ -40,7 +41,7 @@ public class ItemDaoImpl implements ItemDao {
 		System.out.println(this.getClass().getSimpleName() + " >> Creating Item");
 		try (Connection con = DbUtil.getDatabaseConnection();
 				PreparedStatement pstmt = con.prepareStatement(INSERT_ITEM);) {
-			pstmt.setString(1, item.getId());
+			pstmt.setString(1, IdGenerator.generateItemId());
 			pstmt.setString(2, item.getName());
 			pstmt.setString(3, item.getDescription());
 			pstmt.setDouble(4, item.getPrice());
