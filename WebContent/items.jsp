@@ -34,11 +34,11 @@
 						<td>${item.description}</td>
 						<td>${item.price}</td>
 						<td>${item.quantity}</td>
-						<td><a class="btn btn-danger" href="items/delete/${item.id}">Delete</a> / Update</td>
+						<td><a class="btn btn-danger" href="${pageContext.request.contextPath}/items/delete/${item.id}">Delete</a> / <a class="btn btn-info" href="${pageContext.request.contextPath}/items/update/${item.id}">Update</a></td>
 					</tr>
 				</c:forEach>
 				<tr>
-				<td colspan="6"><a href="create-or-update-item.jsp" class="btn btn-block btn-primary">Add New Item</a></td>
+				<td colspan="6"><a href="${pageContext.request.contextPath}/create-or-update-item.jsp" class="btn btn-block btn-primary">Add New Item</a></td>
 				</tr>
 			</tbody>
 		</table>

@@ -22,7 +22,6 @@ import com.dailyfashion.service.ItemServiceImpl;
 public class ItemServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-
 	ItemService itemService;
 
 	/**
@@ -43,6 +42,12 @@ public class ItemServlet extends HttpServlet {
 			String itemId = uri.split("/")[uri.split("/").length - 1];
 			itemService.deleteItem(itemId);
 			response.sendRedirect("../../items");
+		} else if (uri.contains("update")) {
+			String itemId = uri.split("/")[uri.split("/").length - 1];
+			Item item = itemService.readItem(itemId);
+			request.setAttribute("item", item);
+			RequestDispatcher rd = request.getRequestDispatcher("../../create-or-update-item.jsp");
+			rd.forward(request, response);
 		} else {
 			List<Item> items = itemService.getItems();
 			request.setAttribute("items", items);
@@ -58,27 +63,52 @@ public class ItemServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println(this.getClass().getSimpleName() + " >> Creating Item");
+		String id = request.getParameter("id");
+		if (id == null || id == "") {
+			String itemName = request.getParameter("name");
+			String itemDescription = request.getParameter("description");
+			double itemPrice = Double.parseDouble(request.getParameter("price"));
+			int itemQuanity = Integer.parseInt(request.getParameter("quantity"));
+			String itemImageUrl = request.getParameter("imageUrl");
 
-		String itemName = request.getParameter("name");
-		String itemDescription = request.getParameter("description");
-		double itemPrice = Double.parseDouble(request.getParameter("price"));
-		int itemQuanity = Integer.parseInt(request.getParameter("quantity"));
-		String itemImageUrl = request.getParameter("imageUrl");
+			Item item = new Item();
+			item.setName(itemName);
+			item.setDescription(itemDescription);
+			item.setPrice(itemPrice);
+			item.setQuantity(itemQuanity);
+			item.setImageUrl(itemImageUrl);
 
-		Item item = new Item();
-		item.setName(itemName);
-		item.setDescription(itemDescription);
-		item.setPrice(itemPrice);
-		item.setQuantity(itemQuanity);
-		item.setImageUrl(itemImageUrl);
-
-		int i = itemService.createItem(item);
-		if (i > 0) {
-			response.sendRedirect("items");
+			int i = itemService.createItem(item);
+			if (i > 0) {
+				response.sendRedirect("items");
+			} else {
+				PrintWriter out = response.getWriter();
+				out.println("Somthing went wrong...");
+			}
 		} else {
-			PrintWriter out = response.getWriter();
-			out.println("Somthing went wrong...");
+			String itemName = request.getParameter("name");
+			String itemDescription = request.getParameter("description");
+			double itemPrice = Double.parseDouble(request.getParameter("price"));
+			int itemQuanity = Integer.parseInt(request.getParameter("quantity"));
+			String itemImageUrl = request.getParameter("imageUrl");
+
+			Item item = new Item();
+			item.setId(id);
+			item.setName(itemName);
+			item.setDescription(itemDescription);
+			item.setPrice(itemPrice);
+			item.setQuantity(itemQuanity);
+			item.setImageUrl(itemImageUrl);
+
+			int i = itemService.updateItem(item);
+			if (i > 0) {
+				response.sendRedirect("items");
+			} else {
+				PrintWriter out = response.getWriter();
+				out.println("Somthing went wrong...");
+			}
 		}
+
 	}
 
 }

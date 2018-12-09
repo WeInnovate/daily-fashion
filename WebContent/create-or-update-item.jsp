@@ -16,14 +16,15 @@
 		<form action="items" method="post">
 
 			<div class="form-row">
+			<input type="text" name="id" value="${requestScope.item.id}" hidden />
 				<div class="form-group col-md-6">
 					<label for="inputEmail4">Name</label> <input type="text"
-						class="form-control" id="inputEmail4" name="name"
+						class="form-control" id="inputEmail4" name="name" value="${requestScope.item.name}"
 						placeholder="Enter item name">
 				</div>
 				<div class="form-group col-md-6">
 					<label for="inputPassword4">Description</label> <input type="text"
-						class="form-control" id="inputPassword4" name="description"
+						class="form-control" id="inputPassword4" name="description" value="${requestScope.item.description}"
 						placeholder="Enter item description">
 				</div>
 			</div>
@@ -31,18 +32,18 @@
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="inputEmail4">Price</label> <input type="number"
-						class="form-control" id="inputEmail4" name="price"
+						class="form-control" id="inputEmail4" name="price" value="${requestScope.item.price}"
 						placeholder="Enter item price">
 				</div>
 				<div class="form-group col-md-6">
 					<label for="inputPassword4">Quantity</label> <input type="number"
-						class="form-control" id="inputPassword4" name="quantity"
+						class="form-control" id="inputPassword4" name="quantity" value="${requestScope.item.quantity}"
 						placeholder="Enter item quanitity">
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="inputAddress">Image URL</label> <input type="text"
-					class="form-control" id="inputAddress" name="imageUrl"
+					class="form-control" id="inputAddress" name="imageUrl" value="${requestScope.item.imageUrl}"
 					placeholder="Enter item image URL">
 			</div>
 			<input type="submit" class="btn btn-block btn-primary" value="Create Item" />
