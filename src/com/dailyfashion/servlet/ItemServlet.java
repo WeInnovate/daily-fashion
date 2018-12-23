@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.dailyfashion.model.Item;
 import com.dailyfashion.service.ItemService;
@@ -39,15 +40,26 @@ public class ItemServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String uri = request.getRequestURI();
 		if (uri.contains("delete")) {
-			String itemId = uri.split("/")[uri.split("/").length - 1];
-			itemService.deleteItem(itemId);
-			response.sendRedirect("../../items");
+			HttpSession session = request.getSession(false);
+			if (session == null || session.getAttribute("userName") == null) {
+				response.sendRedirect("../../login");
+			} else {
+				System.out.println(session.getAttribute("userName"));
+				String itemId = uri.split("/")[uri.split("/").length - 1];
+				itemService.deleteItem(itemId);
+				response.sendRedirect("../../items");
+			}
 		} else if (uri.contains("update")) {
-			String itemId = uri.split("/")[uri.split("/").length - 1];
-			Item item = itemService.readItem(itemId);
-			request.setAttribute("item", item);
-			RequestDispatcher rd = request.getRequestDispatcher("../../create-or-update-item.jsp");
-			rd.forward(request, response);
+			HttpSession session = request.getSession(false);
+			if (session == null || session.getAttribute("userName") == null) {
+				response.sendRedirect("../../login");
+			} else {
+				String itemId = uri.split("/")[uri.split("/").length - 1];
+				Item item = itemService.readItem(itemId);
+				request.setAttribute("item", item);
+				RequestDispatcher rd = request.getRequestDispatcher("../../create-or-update-item.jsp");
+				rd.forward(request, response);
+			}
 		} else {
 			List<Item> items = itemService.getItems();
 			request.setAttribute("items", items);

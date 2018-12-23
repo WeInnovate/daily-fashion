@@ -14,7 +14,7 @@
 </head>
 <body>
 <div class="container">
-
+<a href="items">All Items</a>
 <a href="create-or-update-item.jsp">Create Item</a>
 		<%
 			request.setAttribute("items", new ItemServiceImpl().getItems());
